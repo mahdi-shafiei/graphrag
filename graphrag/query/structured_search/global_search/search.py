@@ -14,6 +14,7 @@ from typing import Any
 import pandas as pd
 import tiktoken
 
+from graphrag.callbacks.global_search_callbacks import GlobalSearchLLMCallback
 from graphrag.llm.openai.utils import try_parse_json_object
 from graphrag.query.context_builder.builders import GlobalContextBuilder
 from graphrag.query.context_builder.conversation_history import (
@@ -22,9 +23,6 @@ from graphrag.query.context_builder.conversation_history import (
 from graphrag.query.llm.base import BaseLLM
 from graphrag.query.llm.text_utils import num_tokens
 from graphrag.query.structured_search.base import BaseSearch, SearchResult
-from graphrag.query.structured_search.global_search.callbacks import (
-    GlobalSearchLLMCallback,
-)
 from graphrag.query.structured_search.global_search.map_system_prompt import (
     MAP_SYSTEM_PROMPT,
 )
@@ -219,15 +217,10 @@ class GlobalSearch(BaseSearch):
                 # parse search response json
                 processed_response = self.parse_search_response(search_response)
             except ValueError:
-                # Clean up and retry parse
-                try:
-                    # parse search response json
-                    processed_response = self.parse_search_response(search_response)
-                except ValueError:
-                    log.warning(
-                        "Warning: Error parsing search response json - skipping this batch"
-                    )
-                    processed_response = []
+                log.warning(
+                    "Warning: Error parsing search response json - skipping this batch"
+                )
+                processed_response = []
 
             return SearchResult(
                 response=processed_response,
