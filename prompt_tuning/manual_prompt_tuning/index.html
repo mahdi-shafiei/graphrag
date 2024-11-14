@@ -581,6 +581,27 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../index/outputs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Outputs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
     
     
     
@@ -592,10 +613,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
         
           
-          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -606,8 +627,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
             <span class="md-nav__icon md-icon"></span>
             Configuration
           </label>
@@ -1624,7 +1645,7 @@ However, it is quite common to want to tune the prompts to better suit your spec
 We provide a means for you to do this by allowing you to specify a custom prompt file, which will each use a series of token-replacements internally.</p>
 <p>Each of these prompts may be overridden by writing a custom prompt file in plaintext. We use token-replacements in the form of <code>{token_name}</code>, and the descriptions for the available tokens can be found below.</p>
 <h2 id="entityrelationship-extraction">Entity/Relationship Extraction</h2>
-<p><a href="http://github.com/microsoft/graphrag/blob/main/graphrag/index/graph/extractors/graph/prompts.py">Prompt Source</a></p>
+<p><a href="http://github.com/microsoft/graphrag/blob/main/graphrag/prompts/entity_extraction.py">Prompt Source</a></p>
 <h3 id="tokens-values-provided-by-extractor">Tokens (values provided by extractor)</h3>
 <ul>
 <li><strong>{input_text}</strong> - The input text to be processed.</li>
@@ -1634,14 +1655,14 @@ We provide a means for you to do this by allowing you to specify a custom prompt
 <li><strong>{completion_delimiter}</strong> - An indicator for when generation is complete.</li>
 </ul>
 <h2 id="summarize-entityrelationship-descriptions">Summarize Entity/Relationship Descriptions</h2>
-<p><a href="http://github.com/microsoft/graphrag/blob/main/graphrag/index/graph/extractors/summarize/prompts.py">Prompt Source</a></p>
+<p><a href="http://github.com/microsoft/graphrag/blob/main/graphrag/prompts/summarize_descriptions.py">Prompt Source</a></p>
 <h3 id="tokens-values-provided-by-extractor_1">Tokens (values provided by extractor)</h3>
 <ul>
 <li><strong>{entity_name}</strong> - The name of the entity or the source/target pair of the relationship.</li>
 <li><strong>{description_list}</strong> - A list of descriptions for the entity or relationship.</li>
 </ul>
 <h2 id="claim-extraction">Claim Extraction</h2>
-<p><a href="http://github.com/microsoft/graphrag/blob/main/graphrag/index/graph/extractors/claims/prompts.py">Prompt Source</a></p>
+<p><a href="http://github.com/microsoft/graphrag/blob/main/graphrag/prompts/claim_extraction.py">Prompt Source</a></p>
 <h3 id="tokens-values-provided-by-extractor_2">Tokens (values provided by extractor)</h3>
 <ul>
 <li><strong>{input_text}</strong> - The input text to be processed.</li>
@@ -1654,7 +1675,7 @@ The default value is</p>
 <p><code>"Any claims or facts that could be relevant to information discovery."</code></p>
 <p>See the <a href="../../config/overview/">configuration documentation</a> for details on how to change this.</p>
 <h2 id="generate-community-reports">Generate Community Reports</h2>
-<p><a href="http://github.com/microsoft/graphrag/blob/main/graphrag/index/graph/extractors/community_reports/prompts.py">Prompt Source</a></p>
+<p><a href="http://github.com/microsoft/graphrag/blob/main/graphrag/prompts/community_report.py">Prompt Source</a></p>
 <h3 id="tokens-values-provided-by-extractor_3">Tokens (values provided by extractor)</h3>
 <ul>
 <li><strong>{input_text}</strong> - The input text to generate the report with. This will contain tables of entities and relationships.</li>

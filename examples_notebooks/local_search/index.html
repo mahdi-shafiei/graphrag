@@ -581,6 +581,27 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../index/outputs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Outputs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
     
     
     
@@ -592,10 +613,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
         
           
-          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -606,8 +627,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
             <span class="md-nav__icon md-icon"></span>
             Configuration
           </label>
@@ -2334,7 +2355,7 @@ COMMUNITY_LEVEL = 2</div>
 <span class="c1"># load description embeddings to an in-memory lancedb vectorstore</span>
 <span class="c1"># to connect to a remote db, specify url and port values.</span>
 <span class="n">description_embedding_store</span> <span class="o">=</span> <span class="n">LanceDBVectorStore</span><span class="p">(</span>
-    <span class="n">collection_name</span><span class="o">=</span><span class="s2">"entity.description"</span><span class="p">,</span>
+    <span class="n">collection_name</span><span class="o">=</span><span class="s2">"default-entity-description"</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">description_embedding_store</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">db_uri</span><span class="o">=</span><span class="n">LANCEDB_URI</span><span class="p">)</span>
 <span class="n">entity_description_embeddings</span> <span class="o">=</span> <span class="n">store_entity_semantic_embeddings</span><span class="p">(</span>
@@ -2353,7 +2374,7 @@ entities = read_indexer_entities(entity_df, entity_embedding_df, COMMUNITY_LEVEL
 # load description embeddings to an in-memory lancedb vectorstore
 # to connect to a remote db, specify url and port values.
 description_embedding_store = LanceDBVectorStore(
-    collection_name="entity.description",
+    collection_name="default-entity-description",
 )
 description_embedding_store.connect(db_uri=LANCEDB_URI)
 entity_description_embeddings = store_entity_semantic_embeddings(
@@ -2374,13 +2395,6 @@ entity_df.head()</div>
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>Entity count: 178
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>[2024-11-12T21:46:51Z WARN  lance::dataset] No existing dataset at /home/runner/work/graphrag/graphrag/docs/examples_notebooks/inputs/operation dulce/lancedb/entity.description.lance, it will be created
 </pre>
 </div>
 </div>
