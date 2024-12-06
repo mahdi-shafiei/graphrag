@@ -13,8 +13,7 @@ from environs import Env
 from pydantic import TypeAdapter
 
 import graphrag.config.defaults as defs
-
-from .enums import (
+from graphrag.config.enums import (
     CacheType,
     InputFileType,
     InputType,
@@ -23,39 +22,37 @@ from .enums import (
     StorageType,
     TextEmbeddingTarget,
 )
-from .environment_reader import EnvironmentReader
-from .errors import (
+from graphrag.config.environment_reader import EnvironmentReader
+from graphrag.config.errors import (
     ApiKeyMissingError,
     AzureApiBaseMissingError,
     AzureDeploymentNameMissingError,
 )
-from .input_models import (
-    GraphRagConfigInput,
-    LLMConfigInput,
-)
-from .models import (
-    CacheConfig,
-    ChunkingConfig,
-    ClaimExtractionConfig,
-    ClusterGraphConfig,
-    CommunityReportsConfig,
-    DRIFTSearchConfig,
-    EmbedGraphConfig,
-    EntityExtractionConfig,
-    GlobalSearchConfig,
-    GraphRagConfig,
-    InputConfig,
-    LLMParameters,
-    LocalSearchConfig,
-    ParallelizationParameters,
-    ReportingConfig,
-    SnapshotsConfig,
-    StorageConfig,
+from graphrag.config.input_models.graphrag_config_input import GraphRagConfigInput
+from graphrag.config.input_models.llm_config_input import LLMConfigInput
+from graphrag.config.models.cache_config import CacheConfig
+from graphrag.config.models.chunking_config import ChunkingConfig
+from graphrag.config.models.claim_extraction_config import ClaimExtractionConfig
+from graphrag.config.models.cluster_graph_config import ClusterGraphConfig
+from graphrag.config.models.community_reports_config import CommunityReportsConfig
+from graphrag.config.models.drift_search_config import DRIFTSearchConfig
+from graphrag.config.models.embed_graph_config import EmbedGraphConfig
+from graphrag.config.models.entity_extraction_config import EntityExtractionConfig
+from graphrag.config.models.global_search_config import GlobalSearchConfig
+from graphrag.config.models.graph_rag_config import GraphRagConfig
+from graphrag.config.models.input_config import InputConfig
+from graphrag.config.models.llm_parameters import LLMParameters
+from graphrag.config.models.local_search_config import LocalSearchConfig
+from graphrag.config.models.parallelization_parameters import ParallelizationParameters
+from graphrag.config.models.reporting_config import ReportingConfig
+from graphrag.config.models.snapshots_config import SnapshotsConfig
+from graphrag.config.models.storage_config import StorageConfig
+from graphrag.config.models.summarize_descriptions_config import (
     SummarizeDescriptionsConfig,
-    TextEmbeddingConfig,
-    UmapConfig,
 )
-from .read_dotenv import read_dotenv
+from graphrag.config.models.text_embedding_config import TextEmbeddingConfig
+from graphrag.config.models.umap_config import UmapConfig
+from graphrag.config.read_dotenv import read_dotenv
 
 InputModelValidator = TypeAdapter(GraphRagConfigInput)
 
@@ -67,7 +64,7 @@ def create_graphrag_config(
     values = values or {}
     root_dir = root_dir or str(Path.cwd())
     env = _make_env(root_dir)
-    _token_replace(cast(dict, values))
+    _token_replace(cast("dict", values))
     InputModelValidator.validate_python(values, strict=True)
 
     reader = EnvironmentReader(env)
@@ -412,9 +409,6 @@ def create_graphrag_config(
         ):
             snapshots_model = SnapshotsConfig(
                 graphml=reader.bool("graphml") or defs.SNAPSHOTS_GRAPHML,
-                raw_entities=reader.bool("raw_entities") or defs.SNAPSHOTS_RAW_ENTITIES,
-                top_level_nodes=reader.bool("top_level_nodes")
-                or defs.SNAPSHOTS_TOP_LEVEL_NODES,
                 embeddings=reader.bool("embeddings") or defs.SNAPSHOTS_EMBEDDINGS,
                 transient=reader.bool("transient") or defs.SNAPSHOTS_TRANSIENT,
             )
@@ -708,9 +702,7 @@ class Section(str, Enum):
 
 def _is_azure(llm_type: LLMType | None) -> bool:
     return (
-        llm_type == LLMType.AzureOpenAI
-        or llm_type == LLMType.AzureOpenAIChat
-        or llm_type == LLMType.AzureOpenAIEmbedding
+        llm_type == LLMType.AzureOpenAIChat or llm_type == LLMType.AzureOpenAIEmbedding
     )
 
 
